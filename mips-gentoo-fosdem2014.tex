@@ -1,0 +1,141 @@
+\documentclass{beamer}
+
+\batchmode
+
+\usepackage{amsmath,amssymb,enumerate,epsfig,bbm,calc,color,ifthen,capt-of}
+
+\usetheme{Berlin}
+\usecolortheme{mit}
+
+%% <language_settings> %%
+\usepackage[utf8x]{inputenc}
+\usepackage[czech]{babel}
+%% </language_settings> %%
+
+%% Source code insertions
+\usepackage{verbatim}
+
+%% Include images
+\usepackage{graphicx}
+
+%% Hyperlinks
+\usepackage{hyperref}
+
+%% <change me> %%
+\title{The MIPS Battle: Gentoo vs Others}
+\subtitle{FOSDEM 2014}
+\author[Markos Chandras \& Panagiotis Christopoulos]{Markos Chandras $<$hwoarang@gentoo.org$>$ \\ Panagiotis Christopoulos $<$pchrist@gentoo.org$>$}
+\date{Unknown Date}
+%% </change me> %%
+
+%% <logo> %%
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+\newcommand{\MyLogo}{
+	\begin{textblock}{14}(110,7)
+		\includegraphics[width=14mm,height=14mm]{gentoo-logo.png}
+	\end{textblock}
+}
+
+\newcommand*\oldmacro{}
+\let\oldmacro\insertshorttitle
+\renewcommand*\insertshorttitle{
+	\MyLogo
+	\oldmacro\hfill
+}
+%% </logo> %%
+
+%% <bgimage> %%
+\usebackgroundtemplate{
+	\includegraphics[width=\paperwidth,height=\paperheight]{gentoo-background-1.png}
+}
+%% </bgimage> %%
+
+
+\begin{document}
+
+% ----------------------------------- Introduction -------------------------------------
+\frame{\titlepage}
+
+\section{Introduction}
+
+\subsection{Do you want to know more about Markos?}
+
+\begin{frame}{Markos Chandras}
+	\begin{itemize}
+		\item Gentoo Developer since 2009
+		\item MIPS, Release Engineering, Embedded, Desktop/LXDE, Community Relations, Recruiter and others.
+		\item Works at Imagination Technologies, mainly involved in MIPS Linux Kernel maintenance.
+	\end{itemize}
+	Works closely with the Release Engineering Team to provide up-to-date stage3 tarballs for all the possible MIPS variants (mips1, mips2, mips3, mips4, etc)
+\end{frame}
+
+\subsection{..and even more about Panagiotis?}
+\begin{frame}{Panagiotis Christopoulos}
+% TODO
+\end{frame}
+% -----------------------------------------------------------------------------
+
+% ----------------------------------- Overview -------------------------------------
+\section{Overview of the Gentoo/MIPS Port}
+
+\subsection{History}
+
+\begin{frame}{History}
+	\begin{itemize}
+		\item O32 only until 2010.
+		\item Active port until 2008 where its lead developers left Gentoo.
+		\item Matt Turner $<$mattst88@gentoo.org$>$ joined in 2010 and added n32 and n64 multilib support. He also added new MIPS variants to catalyst (release engineering automated tool) and built stages for all the MIPS
+	variants. The MIPS port started to look alive again.
+		\item Anthony Basile $<$blueness@gentoo.org$>$ joined in 2012. He started delivering uClibc MIPS stages.
+	\end{itemize}
+\end{frame}
+
+\subsection{The Gentoo/MIPS port in 2013}
+
+\begin{frame}{Features}
+	\begin{itemize}
+		\item All MIPS ISAs supported (mips1, mips2, mips3, mips4, mips32, mips32r2, mips64, mips64r2)
+		\item Little and Big Endian
+		\item All 3 ABIs supported in full multilib environment.
+		\item Single ABI variants are also supported.
+		\item glibc and uClibc stages (musl support ETA 2014)
+		\item stage4 for loongson 2F laptops (3A support ETA 2014). MIPS is the only Gentoo arch providing stage4 to users.
+		\item Reasonably good package coverage (2262 packages, 13.31\% of total packages in Gentoo portage tree (src: GMN Nov 2013))
+	\end{itemize}
+\end{frame}
+
+\subsection{Limitations}
+
+\begin{frame}{But we are not perfect...}
+	\begin{itemize}
+		\item Testing only architecture. No Arch Testers, strong QA control, no stable support.
+		\item Limited runtime testing of stages.
+		\item Limited available hardware for porting purposes.
+		\item Limited manpower.
+	\end{itemize}
+\end{frame}
+
+
+% ----------------------------------- Other Distributions -------------------------------------
+\section{Lets Fight{!}}
+
+\subsection{Debian}
+\begin{frame}{... vs Debian}
++1 for Debian
+	\begin{itemize}
+		\item Excellent package coverage.
+		\item Wider testing. Need to match the Debian release standards.
+		\item Better QA control.
+	\end{itemize}
+-1 for Debian
+	\begin{itemize}
+		\item No official MIPS64 bit support. MIPS64el/n64 GSOC 2013 earlier this year.
+		\item No MIPS64 Big-Endian yet.
+		\item No alternative libc for root file systems.
+		\item Single ISA supported for 32-bit/64-bit. mips2 for mips/mipsel, mips64r2 (which likely to be downgraded to MIPSIII) for mips64el.
+	\end{itemize}
+Limited hardware and manpower for both distributions.
+\end{frame}
+\end{document}
